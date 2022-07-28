@@ -1,0 +1,26 @@
+<nz-layout style="min-height: 800px;">
+  <nz-sider nzCollapsible nzWidth="200px">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-submenu nzTitle="Admin" nzIcon="setting" nzOpen>
+        <ul>
+          <li nz-menu-item routerLink="/system/users" nzMatchRouter>
+            <i nz-icon nzType="user"></i>
+            <span>Users</span>
+          </li>
+          <li nz-menu-item routerLink="/system/roles" nzMatchRouter>
+            <i nz-icon nzType="usergroup-switch"></i>
+            <span>Roles</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header></nz-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>
