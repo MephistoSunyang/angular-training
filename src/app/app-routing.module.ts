@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminRoutingModule } from '../modules/admin/admin-routing.module';
+import { AdminModule } from '../modules/admin/admin.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'system', pathMatch: 'full' },
-  { path: 'system', loadChildren: () => AdminRoutingModule },
+  { path: 'system', loadChildren: () => AdminModule },
 ];
 
 @NgModule({

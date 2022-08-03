@@ -1,1 +1,105 @@
-<p>roles works!</p>
+<nz-breadcrumb>
+  <nz-breadcrumb-item>Roles</nz-breadcrumb-item>
+</nz-breadcrumb>
+<div class="inner-content">
+  <!-- roles table begin -->
+  <nz-table
+    #rolesTable
+    [nzLoading]="loading"
+    [nzData]="roles"
+    nzSize="small"
+    nzBordered
+  >
+    <thead>
+      <tr>
+        <th width="60" nzAlign="center">ID</th>
+        <th nzAlign="center">Name</th>
+        <th width="140" nzAlign="center">
+          <button
+            nz-button
+            nzType="primary"
+            nzShape="circle"
+            (click)="openModal()"
+          >
+            <i nz-icon nzType="plus"></i>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of rolesTable.data">
+        <td>{{ role.id }}</td>
+        <td>{{ role.name }}</td>
+        <td nzAlign="center">
+          <nz-space nzSize="middle">
+            <button
+              nz-button
+              *nzSpaceItem
+              nzType="primary"
+              nzShape="circle"
+              (click)="openModal(role)"
+            >
+              <i nz-icon nzType="edit"></i>
+            </button>
+            <button
+              nz-button
+              *nzSpaceItem
+              nzType="primary"
+              nzShape="circle"
+              nzDanger
+              nz-popconfirm
+              nzPopconfirmTitle="Are you sure you want to delete this role?"
+              [nzLoading]="deleteId === role.id"
+              [disabled]="deleteId === role.id"
+              (nzOnConfirm)="deleteRole(role.id)"
+            >
+              <i nz-icon nzType="delete"></i>
+            </button>
+          </nz-space>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <!-- roles table end -->
+</div>
+
+<!-- roles modal begin -->
+<nz-modal
+  [(nzVisible)]="modalVisible"
+  nzTitle="Role Profile"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="closeModal()"
+>
+</nz-modal>
+<ng-template #modalContent>
+  <nz-content>
+    <form nz-form [formGroup]="roleForm">
+      <nz-form-item>
+        <nz-form-label nzSpan="4" nzFor="form-name" nzRequired>
+          Name
+        </nz-form-label>
+        <nz-form-control
+          nzSpan="20"
+          nzHasFeedback
+          nzErrorTip="Please input role name!"
+        >
+          <input id="form-name" nz-input formControlName="name" />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-content>
+</ng-template>
+<ng-template #modalFooter>
+  <button nz-button nzType="default" (click)="closeModal()">Cancel</button>
+  <button
+    nz-button
+    nzType="primary"
+    [disabled]="disabled"
+    [nzLoading]="saving"
+    (click)="saveRole()"
+  >
+    Save
+  </button>
+</ng-template>
+<!-- roles modal end -->
